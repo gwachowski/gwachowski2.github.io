@@ -39,11 +39,11 @@ path {
       <p> .</p>
       <a href="https://docs.google.com/document/d/1OQJyVtdPwurR1ABJ2f-ZNXejQC3XghAw_0zi29A-dWM/edit?usp=sharing">Design Documenation</a>
       <p> .</p>
-      <a href="https://youtube.com">Youtube Link</a>
+      <a href="https://youtu.be/bn7kUlvU2iM">Youtube Link</a>
       <p> .</p>
 
 
-      <b> 1854 London Map; blue= pumps, red=location of deaths</b>
+      <b> 1854 London Map with Cholera Outbreak; Blue = Pumps, Red = Location of Deaths, Green = Brewery</b>
       <div id="svg1"></div>
       <div id="svg2"></div>
 
@@ -94,34 +94,31 @@ path {
                         .style('fill', 'red')
                         .attr("cx", function(d) {return xScale(d.x)})
                         .attr("cy", function(d) {return yScale(d.y)})
-                        .attr("r", 4);
+                        .attr("r", 3);
                       });
 
-                    d3.csv("brew.csv", function(brew) {
-
-                        svg.selectAll("circle")
-                           .data(brew).enter()
-                           .append("circle")
-                           .style('fill', 'yellow')
-                           .attr("cx", function(d) {return xScale(d.x)})
-                           .attr("cy", function(d) {return yScale(d.y)})
-                           .attr("r", 4);
-                         });
-
-                    d3.csv("workhouse.csv", function(work) {
-
-                             svg.selectAll("circle")
-                                .data(work).enter()
-                                .append("circle")
-                                .style('fill', 'yellow')
-                                .attr("cx", function(d) {return xScale(d.x)})
-                                .attr("cy", function(d) {return yScale(d.y)})
-                                .attr("r", 4);
-                              });
-
-
-
             });
+            d3.csv("brew.csv", function(brew) {
+
+                svg.selectAll("circle")
+                   .data(brew).enter()
+                   .append("circle")
+                   .style('fill', 'green')
+                   .attr("cx", function(d) {return xScale(d.x)})
+                   .attr("cy", function(d) {return yScale(d.y)})
+                   .attr("r", 5);
+                 });
+
+            d3.csv("workhouse.csv", function(work) {
+
+                     svg.selectAll("circle")
+                        .data(work).enter()
+                        .append("circle")
+                        .style('fill', 'green')
+                        .attr("cx", function(d) {return xScale(d.x)})
+                        .attr("cy", function(d) {return yScale(d.y)})
+                        .attr("r", 5);
+                      });
 
 
             // Set the dimensions of the canvas / graph
