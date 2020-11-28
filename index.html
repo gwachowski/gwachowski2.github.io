@@ -1,207 +1,197 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>My first D3</title>
-    <script src="https://d3js.org/d3.v6.min.js"></script>
-  </head>
-  <body>
-    <p>Project 1</p>
-    <p>Gabriel Wachowski</p>
-    <p>Project Description: "recreate Dr. John Snow's map using today's
-      tools of trade (D3, to be specific). In addition to recreating the original map
-      in an interactive version, you will add additional charts to the side of the map,
-      as well as interface elements to make the data more interactive."</p>
-<h4>Number of Deaths per Day</h4>
+<html lang="en">
+<style>
+body { font: 16px Arial;}
+path {
+  stroke: red;
+	stroke-width: 2;
+	fill: none;
+}
+.axis path,
+.axis line {
+	fill: none;
+	stroke: grey;
+	stroke-width: 1;
+	shape-rendering: crispEdges;
+}
+</style>
+    <head>
+        <meta charset = "UTF-8">
+        <script src="https://d3js.org/d3.v3.min.js"></script>
+        <script src="streets.json"></script>
+        <script src="pumps.csv" type="csv"></script>
+        <script src="deathdays.csv" type="csv"></script>
+        <script src="deaths_age_sex.csv" type="csv"></script>
+        <script src="deathdays.csv" type="csv"></script>
+        <script src="brew.csv" type="csv"></script>
+        <script src="workhouse.csv" type="csv"></script>
+        <title>Project 1</title>
+    </head>
+    <body>
+      <b>Project 1</b>
 
-<div id="svg1"></div>
-<div id="svg2"></div>
-<script>
-
-var lineData = [];
-lineData.push({date:new Date(1854, 07, 20), nps:1});
-lineData.push({date:new Date(1854, 07, 21), nps:1});
-lineData.push({date:new Date(1854, 07, 22), nps:0});
-lineData.push({date:new Date(1854, 07, 23), nps:1});
-lineData.push({date:new Date(1854, 07, 24), nps:1});
-lineData.push({date:new Date(1854, 07, 25), nps:0});
-lineData.push({date:new Date(1854, 07, 26), nps:1});
-lineData.push({date:new Date(1854, 07, 27), nps:1});
-lineData.push({date:new Date(1854, 07, 28), nps:1});
-lineData.push({date:new Date(1854, 07, 29), nps:1});
-lineData.push({date:new Date(1854, 07, 30), nps:8});
-lineData.push({date:new Date(1854, 07, 31), nps:56});
-lineData.push({date:new Date(1854, 08, 01), nps:143});
-lineData.push({date:new Date(1854, 08, 02), nps:116});
-lineData.push({date:new Date(1854, 08, 03), nps:54});
-lineData.push({date:new Date(1854, 08, 04), nps:46});
-lineData.push({date:new Date(1854, 08, 05), nps:36});
-lineData.push({date:new Date(1854, 08, 06), nps:20});
-lineData.push({date:new Date(1854, 08, 07), nps:28});
-lineData.push({date:new Date(1854, 08, 08), nps:12});
-lineData.push({date:new Date(1854, 08, 09), nps:11});
-lineData.push({date:new Date(1854, 08, 10), nps:5});
-lineData.push({date:new Date(1854, 08, 11), nps:5});
-lineData.push({date:new Date(1854, 08, 12), nps:1});
-lineData.push({date:new Date(1854, 08, 13), nps:3});
-lineData.push({date:new Date(1854, 08, 14), nps:0});
-lineData.push({date:new Date(1854, 08, 15), nps:1});
-lineData.push({date:new Date(1854, 08, 16), nps:4});
-lineData.push({date:new Date(1854, 08, 17), nps:2});
-lineData.push({date:new Date(1854, 08, 18), nps:3});
-lineData.push({date:new Date(1854, 08, 19), nps:0});
-lineData.push({date:new Date(1854, 08, 20), nps:0});
-lineData.push({date:new Date(1854, 08, 21), nps:2});
-lineData.push({date:new Date(1854, 08, 22), nps:1});
-lineData.push({date:new Date(1854, 08, 23), nps:1});
-lineData.push({date:new Date(1854, 08, 24), nps:1});
-lineData.push({date:new Date(1854, 08, 25), nps:1});
-lineData.push({date:new Date(1854, 08, 26), nps:1});
-lineData.push({date:new Date(1854, 08, 27), nps:1});
-lineData.push({date:new Date(1854, 08, 28), nps:0});
-lineData.push({date:new Date(1854, 08, 29), nps:0});
-lineData.sort(function(a,b){
-    return new Date(b.date) - new Date(a.date);
-});
-
-var height  = 200;
-var width   = 900;
-var hEach   = 40;
-
-var margin = {top: 50, right: 10, bottom: 70, left: 15};
-
-width =     width - margin.left - margin.right;
-height =    height - margin.top - margin.bottom;
-
-var chart1 = d3.select('#svg2').append("svg")
-  .attr("width",  width + margin.left + margin.right)
-  .attr("height", height + margin.top + margin.bottom)
-  .append("g")
-  .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-// set the ranges
-var x = d3.scaleTime().range([0, width]);
-
-x.domain(d3.extent(lineData, function(d) { return d.date; }));
+      <b>Gabriel Wachowski</b>
+      <p> .</p>
+      <p>Project Description: "recreate Dr. John Snow's map using today's
+        tools of trade (D3, to be specific). In addition to recreating the original map
+        in an interactive version, you will add additional charts to the side of the map,
+        as well as interface elements to make the data more interactive."</p>
+      <p> .</p>
+      <a href="https://docs.google.com/document/d/1OQJyVtdPwurR1ABJ2f-ZNXejQC3XghAw_0zi29A-dWM/edit?usp=sharing">Design Documenation</a>
+      <p> .</p>
+      <a href="https://youtube.com">Youtube Link</a>
+      <p> .</p>
 
 
-var y = d3.scaleLinear().range([height, 0]);
+      <b> 1854 London Map; blue= pumps, red=location of deaths</b>
+      <div id="svg1"></div>
+      <div id="svg2"></div>
 
 
-y.domain([d3.min(lineData, function(d) { return d.nps; }) - 5, 100]);
 
-var valueline = d3.line()
-        .x(function(d) { return x(d.date); })
-        .y(function(d) { return y(d.nps);  })
-        .curve(d3.curveMonotoneX);
+        <script>
+            var w = 960;     // width of svg
+            var h = 800;      // height of svg
+            var xScale = d3.scale.linear(); 
+            var yScale = d3.scale.linear();
+            xScale.domain([0,20]).range([0, w]); 
+            yScale.domain([20,0]).range( [0,h]); 
+            var pathGenerator = d3.svg.line() 
+            .x(function(d) { return xScale(d.x); }) 
+            .y(function(d) { return yScale(d.y); });
 
-chart1.append("path")
-    .data([lineData])
-    .attr("class", "line")
-    .attr("d", valueline);
+            var svg = d3.select( "#svg1" )
+                    .append( "svg" )
+                    .attr( "width", w )
+                    .attr( "height", h );
 
-//  var xAxis_woy = d3.axisBottom(x).tickFormat(d3.timeFormat("Week %V"));
-var xAxis_woy = d3.axisBottom(x).ticks(11).tickFormat(d3.timeFormat("%y-%b-%d")).tickValues(lineData.map(d=>d.date));
+            d3.json("streets.json", function(streets){
+                 svg.selectAll(".line") 
+                .data(streets) 
+                .enter().append("path") 
+                .style('fill', 'none') 
+                .style('stroke', 'black') 
+                .style('stroke-width', '1.5px') 
+                .attr("class", "map") 
+                .attr("d", pathGenerator);
 
-chart1.append("g")
-        .attr("class", "x axis")
-        .attr("transform", "translate(0," + height + ")")
-        .call(xAxis_woy)
-        .selectAll("text")
-        .attr("x", 9)
-        .attr("dy", ".35em")
-        .attr("transform", "rotate(90)")
-        .style("text-anchor", "start");
+                  d3.csv("pumps.csv", function(pumps) {
 
-//  Add the Y Axis
-//  svg.append("g").call(d3.axisLeft(y));
+                  svg.selectAll("circle")
+                     .data(pumps).enter()
+                     .append("circle")
+                     .style('fill', 'blue')
+                     .attr("cx", function(d) {return xScale(d.x)})
+                     .attr("cy", function(d) {return yScale(d.y)})
+                     .attr("r", 4);
+                   });
 
-chart1.selectAll(".dot")
-    .data(lineData)
-    .enter()
-    .append("circle") // Uses the enter().append() method
-    .attr("class", "dot") // Assign a class for styling
-    .attr("cx", function(d) { return x(d.date) })
-    .attr("cy", function(d) { return y(d.nps) })
-    .attr("r", 5)
-    .style("fill", "red");
+                   d3.csv("deaths_age_sex.csv", function(deaths) {
+
+                     svg.selectAll("circle")
+                        .data(deaths).enter()
+                        .append("circle")
+                        .style('fill', 'red')
+                        .attr("cx", function(d) {return xScale(d.x)})
+                        .attr("cy", function(d) {return yScale(d.y)})
+                        .attr("r", 4);
+                      });
+
+                    d3.csv("brew.csv", function(brew) {
+
+                        svg.selectAll("circle")
+                           .data(brew).enter()
+                           .append("circle")
+                           .style('fill', 'yellow')
+                           .attr("cx", function(d) {return xScale(d.x)})
+                           .attr("cy", function(d) {return yScale(d.y)})
+                           .attr("r", 4);
+                         });
+
+                    d3.csv("workhouse.csv", function(work) {
+
+                             svg.selectAll("circle")
+                                .data(work).enter()
+                                .append("circle")
+                                .style('fill', 'yellow')
+                                .attr("cx", function(d) {return xScale(d.x)})
+                                .attr("cy", function(d) {return yScale(d.y)})
+                                .attr("r", 4);
+                              });
 
 
-chart1.selectAll(".text")
-    .data(lineData)
-    .enter()
-    .append("text") // Uses the enter().append() method
-    .attr("class", "label") // Assign a class for styling
-    .attr("x", function(d, i) { return x(d.date) })
-    .attr("y", function(d) { return y(d.nps) })
-    .attr("dy", "-5")
-    .text(function(d) {return d.nps; })
-    .style("fill", "red");
 
-chart1.append('text')
-      .attr('x', 10)
-      .attr('y', -5)
-      .text('Cholera Epidemic');
-      var width = 409;
-      var height = 209;
-      var word = "gongoozler";
+            });
 
-      var holder = d3.select("body")
-            .append("svg")
-            .attr("width", width)
-            .attr("height", height);
 
-      // draw a rectangle
-      holder.append("a")
-          .attr("xlink:href", "https://docs.google.com/document/d/1OQJyVtdPwurR1ABJ2f-ZNXejQC3XghAw_0zi29A-dWM/edit?usp=sharing"+word)
-          .append("rect")
-          .attr("x", 100)
-          .attr("y", 50)
-          .attr("height", 100)
-          .attr("width", 200)
-          .style("fill", "lightgreen")
-          .attr("rx", 10)
-          .attr("ry", 10);
+            // Set the dimensions of the canvas / graph
+            var	margin = {top: 30, right: 20, bottom: 30, left: 50},
+            	width = 800 - margin.left - margin.right,
+            	height = 370 - margin.top - margin.bottom;
 
-      // draw text on the screen
-      holder.append("text")
-          .attr("x", 200)
-          .attr("y", 100)
-          .style("fill", "black")
-          .style("font-size", "20px")
-          .attr("dy", ".35em")
-          .attr("text-anchor", "middle")
-          .style("pointer-events", "none")
-          .text("Documentation");
+            // Parse the date / time
+            var	parseDate = d3.time.format("%d-%b-%y").parse;
 
-          var holder = d3.select("body")
-                .append("svg")
-                .attr("width", width)
-                .attr("height", height);
+            // Set the ranges
+            var	x = d3.time.scale().range([0, width]);
+            var	y = d3.scale.linear().range([height, 0]);
 
-          // draw a rectangle
-          holder.append("a")
-              .attr("xlink:href", "https://docs.google.com/document/d/1OQJyVtdPwurR1ABJ2f-ZNXejQC3XghAw_0zi29A-dWM/edit?usp=sharing"+word)
-              .append("rect")
-              .attr("x", 100)
-              .attr("y", 50)
-              .attr("height", 100)
-              .attr("width", 200)
-              .style("fill", "lightblue")
-              .attr("rx", 10)
-              .attr("ry", 10);
+            // Define the axes
+            var	xAxis = d3.svg.axis().scale(x)
+            	.orient("bottom").ticks(10);
 
-          // draw text on the screen
-          holder.append("text")
-              .attr("x", 200)
-              .attr("y", 100)
-              .style("fill", "black")
-              .style("font-size", "20px")
-              .attr("dy", ".35em")
-              .attr("text-anchor", "middle")
-              .style("pointer-events", "none")
-              .text("YouTube Video");
+            var	yAxis = d3.svg.axis().scale(y)
+            	.orient("left").ticks(10);
 
-</script>
-  </body>
+            // Define the line
+            var	valueline = d3.svg.line()
+            	.x(function(d) { return x(d.date); })
+            	.y(function(d) { return y(d.deaths); });
+
+            // Adds the svg canvas
+            var	chart1 = d3.select("#svg2")
+            	.append("svg")
+            		.attr("width", width + margin.left + margin.right)
+            		.attr("height", height + margin.top + margin.bottom)
+            	.append("g")
+            		.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+            // Get the data
+            d3.csv("deathdays.csv", function(error, data) {
+            	data.forEach(function(d) {
+            		d.date = parseDate(d.date);
+            		d.deaths = +d.deaths;
+            	});
+
+            	// Scale the range of the data
+            	x.domain(d3.extent(data, function(d) { return d.date; }));
+            	y.domain([0, d3.max(data, function(d) { return d.deaths; })]);
+
+            	// Add the valueline path.
+            	chart1.append("path")		// Add the valueline path.
+            		.attr("class", "line")
+            		.attr("d", valueline(data));
+
+            	// Add the X Axis
+            	chart1.append("g")			// Add the X Axis
+            		.attr("class", "x axis")
+            		.attr("transform", "translate(0," + height + ")")
+            		.call(xAxis);
+
+            	// Add the Y Axis
+            	chart1.append("g")			// Add the Y Axis
+            		.attr("class", "y axis")
+            		.call(yAxis);
+
+                chart1.append('text')
+                      .text('Cholera Epidemic Number of Deaths by Day');
+                      var word = "gongoozler";
+
+            });
+
+
+
+
+        </script>
+    </body>
 </html>
